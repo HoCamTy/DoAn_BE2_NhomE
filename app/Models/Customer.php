@@ -2,28 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Customer extends Authenticatable
+class Customer extends Model
 {
-    use Notifiable;
+    use HasFactory;
 
-    protected $fillable = [
-        'customer_name',
-        'phone',
-        'email',
-        'address',
-        'password',
-        'create_date'
-    ];
+    
+    protected $fillable = ['name', 'phone', 'email', 'address'];
 
-    protected $casts = [
-        'create_date' => 'datetime'
-    ];
-    public function appointments()
-    {
-        return $this->hasMany(Appointment::class);
-    }
 }

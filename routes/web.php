@@ -1,65 +1,71 @@
 <?php
 
-use App\Http\Controllers\AppointmentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CrudUserController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\RatingController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\PasswordResetController;
+use App\Http\Controllers\CustomerController;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Auth;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+use App\Http\Controllers\ForgotPasswordController;
+// Thêm route
+Route::get('/forgot-password', [ForgotPasswordController::class, 'showForm'])->name('forgot-password');
+Route::post('/forgot-password', [ForgotPasswordController::class, 'processRequest'])->name('process-forgot-password');
 
-// Public routes
-Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [LoginController::class, 'login']);
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-Route::get('/register', [RegisterController::class, 'showRegistrationForm'])
-    ->name('register');
-Route::post('/register', [RegisterController::class, 'register']);
-// Protected admin routes
-Route::middleware(['checkauth'])->prefix('admin')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
-
-    Route::resource('services', ServiceController::class);
-    Route::resource('appointments', AppointmentController::class);
-    // Other admin routes
+// Debug route để xem tất cả các route
+Route::get('/debug-routes', function () {
+    $routes = Route::getRoutes();
+    $routeList = [];
+    
+    foreach ($routes as $route) {
+        $routeList[] = [
+            'uri' => $route->uri(),
+            'methods' => $route->methods(),
+            'name' => $route->getName(),
+            'action' => $route->getActionName(),
+            'middleware' => implode(', ', $route->middleware())
+        ];
+    }
+    
+    return $routeList;
 });
 
-// Protected customer routes
-Route::middleware(['checkauth'])->prefix('customer')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('customer.dashboard');
-    })->name('customer.dashboard');
-    Route::get('/my-appointments', [AppointmentController::class, 'myAppointments'])
-        ->name('customer.appointments');
-    Route::post('/appointments/{appointment}/cancel', [AppointmentController::class, 'cancelAppointment'])
-        ->name('customer.appointments.cancel');
-    Route::get('/appointments/create', [AppointmentController::class, 'customerCreate'])
-        ->name('customer.appointments.create');
-    Route::post('/appointments', [AppointmentController::class, 'customerStore'])
-        ->name('customer.appointments.store');
-    // Other customer routes
+// Debug Auth status
+Route::get('/auth-status', function () {
+    return [
+        'logged_in' => Auth::check(),
+        'user' => Auth::check() ? Auth::user()->email : 'Not logged in'
+    ];
 });
 
-// Home route
-Route::get('/', function () {
-    if (Auth::guard('web')->check()) {
-        return redirect()->route('admin.dashboard');
-    }
-    if (Auth::guard('customer')->check()) {
-        return redirect()->route('customer.dashboard');
-    }
-    return redirect()->route('login');
-})->name('home');
+// Các route không yêu cầu đăng nhập
+Route::get('/', [CrudUserController::class, 'index'])->name('index');
+Route::get('login', [CrudUserController::class, 'login'])->name('login');
+Route::post('login', [CrudUserController::class, 'authUser'])->name('user.authUser');
+Route::get('create', [CrudUserController::class, 'createUser'])->name('user.createUser');
+Route::post('create', [CrudUserController::class, 'postUser'])->name('user.postUser');
+
+// QUAN TRỌNG: Route đặt lại mật khẩu PHẢI đặt NGOÀI middleware crud_user
+Route::get('/forgot-password', [PasswordResetController::class, 'showForgotForm'])->name('password.forgot');
+Route::post('/forgot-password', [PasswordResetController::class, 'processForgotPassword'])->name('password.process.forgot');
+
+// Các route yêu cầu đăng nhập
+Route::middleware(['crud_user'])->group(function () {
+    Route::get('dashboard', [CrudUserController::class, 'dashboard']);
+    Route::get('read', [CrudUserController::class, 'readUser'])->name('user.readUser');
+    Route::get('delete', [CrudUserController::class, 'deleteUser'])->name('user.deleteUser');
+    Route::get('update', [CrudUserController::class, 'updateUser'])->name('user.updateUser');
+    Route::post('update', [CrudUserController::class, 'postUpdateUser'])->name('user.postUpdateUser');
+    Route::get('list', [CrudUserController::class, 'listUser'])->name('user.list');
+    Route::get('signout', [CrudUserController::class, 'signOut'])->name('signout');
+    Route::get('/ratings', [RatingController::class, 'index'])->name('ratings.index');
+    
+    Route::get('/thongtincanhan', [UserController::class, 'show'])->name('thongtincanhan.show');
+    Route::post('/thongtincanhan/update', [UserController::class, 'update'])->name('thongtincanhan.update');
+    
+    /// Quên mật khẩu - KHÔNG YÊU CẦU ĐĂNG NHẬP
+Route::get('/forgot-password', [ForgotPasswordController::class, 'showForm'])->name('forgot-password');
+Route::post('/forgot-password', [ForgotPasswordController::class, 'processRequest'])->name('process-forgot-password');
+Route::post('/reset-password', [ForgotPasswordController::class, 'resetPassword'])->name('reset-password');});

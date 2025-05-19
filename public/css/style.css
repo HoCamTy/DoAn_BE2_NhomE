@@ -1,90 +1,156 @@
-  /* Đảm bảo Footer luôn ở cuối trang */
-  body {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      margin: 0;
-  }
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
 
-  main {
-      flex: 1;
-  }
+.menu {
+    margin-bottom: 20px;
+}
 
-  footer {
-      background-color: #00564e;
-      color: white;
-      padding: 10px 0;
-      text-align: center;
-  }
+.menu a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: black;
+}
 
-  .navbar {
-      background-color: #00564e;
-  }
+h1 {
+    margin-top: 50px;
+}
 
-  .navbar-brand,
-  .nav-link {
-      color: white !important;
-  }
+.container {
+    width: 300px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
 
-  /* Card Styling */
-  .card {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      padding: 15px;
-      transition: transform 0.3s ease-in-out;
-  }
+input[type="text"], input[type="email"], input[type="password"] {
+    width: 90%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
 
-  .card:hover {
-      transform: scale(1.05);
-  }
+.checkbox {
+    text-align: left;
+    margin: 10px 0;
+}
 
-  .card img {
-      width: 30%;
-      height: 30%;
-      object-fit: cover;
-      margin-right: 20px;
-  }
+.forgot {
+    text-align: right;
+    font-size: 12px;
+}
 
-  .card-title {
-      margin: 0;
-      text-align: left;
-      color: #00564e;
-      font-size: 1.25rem;
-  }
+.btn {
+    background-color: blue;
+    color: white;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
 
-  .card-link {
-      text-decoration: none;
-      color: inherit;
-  }
-
-  .custom-card {
-
-      height: 140px;
-      /* Giới hạn chiều cao */
-  }
-
-  .custom-card img {
-      height: 120px;
-      /* Chiều cao ảnh */
-      object-fit: cover;
-      /* Cắt ảnh nếu vượt quá kích thước */
-  }
-
-  .flatpickr-time input.numInput,
-  .flatpickr-time input,
-  .flatpickr-time .flatpickr-time-separator,
-  .flatpickr-time .flatpickr-am-pm {
-      height: 38px !important;
-      line-height: 38px !important;
-  }
-
-  .flatpickr-time {
-      height: 38px !important;
-      max-height: 38px !important;
-  }
-
-  .flatpickr-calendar {
-      min-width: 300px;
-  }
- 
+.footer {
+    margin-top: 20px;
+    font-size: 12px;
+    color: gray;
+}
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+.container {
+    width: 400px;
+    margin: auto;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+}
+input[type="text"], input[type="password"], input[type="email"] {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+.btn {
+    background-color: blue;
+    color: white;
+    padding: 10px;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 3px;
+}
+.btn:hover {
+    background-color: darkblue;
+}
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+.container {
+    width: 80%;
+    margin: auto;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+table, th, td {
+    border: 1px solid black;
+}
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+.pagination {
+    margin-top: 20px;
+}
+.pagination a {
+    padding: 8px 12px;
+    margin: 5px;
+    border: 1px solid #000;
+    text-decoration: none;
+}
+.pagination a:hover {
+    background-color: #ddd;
+}
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+.container {
+    width: 50%;
+    margin: auto;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+}
+.detail {
+    text-align: left;
+    margin: 20px auto;
+    width: 60%;
+}
+.detail p {
+    margin: 10px 0;
+}
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: blue;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+.btn:hover {
+    background-color: darkblue;
+}
