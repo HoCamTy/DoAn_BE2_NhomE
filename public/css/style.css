@@ -1,0 +1,90 @@
+  /* Đảm bảo Footer luôn ở cuối trang */
+  body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+  }
+
+  main {
+      flex: 1;
+  }
+
+  footer {
+      background-color: #00564e;
+      color: white;
+      padding: 10px 0;
+      text-align: center;
+  }
+
+  .navbar {
+      background-color: #00564e;
+  }
+
+  .navbar-brand,
+  .nav-link {
+      color: white !important;
+  }
+
+  /* Card Styling */
+  .card {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 15px;
+      transition: transform 0.3s ease-in-out;
+  }
+
+  .card:hover {
+      transform: scale(1.05);
+  }
+
+  .card img {
+      width: 30%;
+      height: 30%;
+      object-fit: cover;
+      margin-right: 20px;
+  }
+
+  .card-title {
+      margin: 0;
+      text-align: left;
+      color: #00564e;
+      font-size: 1.25rem;
+  }
+
+  .card-link {
+      text-decoration: none;
+      color: inherit;
+  }
+
+  .custom-card {
+
+      height: 140px;
+      /* Giới hạn chiều cao */
+  }
+
+  .custom-card img {
+      height: 120px;
+      /* Chiều cao ảnh */
+      object-fit: cover;
+      /* Cắt ảnh nếu vượt quá kích thước */
+  }
+
+  .flatpickr-time input.numInput,
+  .flatpickr-time input,
+  .flatpickr-time .flatpickr-time-separator,
+  .flatpickr-time .flatpickr-am-pm {
+      height: 38px !important;
+      line-height: 38px !important;
+  }
+
+  .flatpickr-time {
+      height: 38px !important;
+      max-height: 38px !important;
+  }
+
+  .flatpickr-calendar {
+      min-width: 300px;
+  }
+ 
