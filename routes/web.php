@@ -6,6 +6,7 @@ use App\Http\Controllers\CrudUserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\ResetPasswordController;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -69,3 +70,6 @@ Route::get('/', function () {
 
 Route::get('/profile', [CrudUserController::class, 'showProfile'])->name('profile');
 Route::post('/profile', [CrudUserController::class, 'updateProfile']);
+// Reset password routes
+Route::get('/reset-password', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.update');
