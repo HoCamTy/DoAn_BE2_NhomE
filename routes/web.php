@@ -7,6 +7,9 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\CustomerRatingController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -63,3 +66,7 @@ Route::get('/', function () {
     }
     return redirect()->route('login');
 })->name('home');
+Route::middleware(['checkauth'])->group(function () {
+    Route::get('/ratings', [CustomerRatingController::class, 'index'])->name('ratings.index');
+    Route::post('/ratings', [CustomerRatingController::class, 'store'])->name('ratings.store');
+});
