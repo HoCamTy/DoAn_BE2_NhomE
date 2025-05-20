@@ -6,6 +6,7 @@ use App\Http\Controllers\CrudUserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ServiceController;
+
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -63,3 +64,8 @@ Route::get('/', function () {
     }
     return redirect()->route('login');
 })->name('home');
+// Profile routes
+    
+
+Route::get('/profile', [CrudUserController::class, 'showProfile'])->name('profile');
+Route::post('/profile', [CrudUserController::class, 'updateProfile']);
