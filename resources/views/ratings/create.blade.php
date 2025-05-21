@@ -1,3 +1,4 @@
+
 <!-- resources/views/ratings/create.blade.php -->
 @extends('layouts.app')
 
@@ -46,7 +47,6 @@
         </div>
     </div>
 </div>
-
 <!-- Gắn JS hiệu ứng sao như trong file cũ -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {

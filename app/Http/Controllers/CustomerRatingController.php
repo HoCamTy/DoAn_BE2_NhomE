@@ -41,3 +41,4 @@ class CustomerRatingController extends Controller
         return redirect()->route('ratings.index')->with('success', 'Cảm ơn bạn đã đánh giá!');
     }
 }
+

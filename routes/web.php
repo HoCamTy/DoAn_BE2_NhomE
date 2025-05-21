@@ -11,6 +11,7 @@ use App\Http\Controllers\CustomerRatingController;
 use App\Http\Controllers\PasswordResetController;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\CustomerRating;
 
 use App\Http\Controllers\CustomerController;
 /*
@@ -95,6 +96,7 @@ Route::get('/', function () {
     }
     return redirect()->route('login');
 })->name('home');
+
 // Profile routes
     
 
@@ -109,5 +111,4 @@ Route::post('/password/reset', [PasswordResetController::class, 'handleReset'])-
 Route::get('/ratings/create', [CustomerRatingController::class, 'create'])->name('ratings.create');
 Route::post('/ratings', [CustomerRatingController::class, 'store'])->name('ratings.store');
 Route::get('/ratings', [CustomerRatingController::class, 'index'])->name('ratings.index');
-
 
