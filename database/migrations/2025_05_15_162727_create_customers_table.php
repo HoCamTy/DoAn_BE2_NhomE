@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->string('customer_name', 100)->nullable();
+            $table->string('customer_name', 100)->nullable(); // đổi từ customer_name thành name
             $table->string('phone', 15)->unique();
             $table->string('email', 100)->nullable();
             $table->string('password')->nullable();

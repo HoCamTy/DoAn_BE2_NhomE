@@ -7,7 +7,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Controllers\CustomerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +18,14 @@ use Illuminate\Support\Facades\Auth;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::prefix('admin')->group(function () {
+    Route::resource('customers', CustomerController::class);
+});
+
+
+Route::get('/admin/customers', [CustomerController::class, 'index'])->name('customers.index');
+
 
 // Public routes
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');

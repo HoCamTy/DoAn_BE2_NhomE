@@ -21,15 +21,18 @@
                 </div>
             </a>
         </div>
+       
         <!-- Khách Hàng -->
-        <div class="col-md-6">
-            <a href="" class="card-link">
-                <div class="card shadow">
-                    <img src="{{ asset('images/khachhang.jpg') }}" alt="Customer">
-                    <h5 class="card-title">Khách Hàng</h5>
-                </div>
-            </a>
+<div class="col-md-6">
+    <a href="{{ route('customers.index') }}" class="card-link">
+        <div class="card shadow">
+            <img src="{{ asset('images/khachhang.jpg') }}" alt="Customer">
+            <h5 class="card-title">Khách Hàng</h5>
         </div>
+    </a>
+</div>
+
+        
         <!-- Thanh Toán -->
         <div class="col-md-6">
             <a href="" class="card-link">
