@@ -26,4 +26,5 @@ public $timestamps = false;
     {
         return $this->hasMany(Appointment::class);
     }
+    protected $table = 'customers'; 
 }
