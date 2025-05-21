@@ -81,7 +81,7 @@
                                 <br>
                                 <small>
                                     Quên mật khẩu?
-                                    <a href class="text-decoration-none" style="color: #00564e;">Đặt lại mật khẩu</a>
+                                   <a href="{{ route('password.form') }}" class="text-decoration-none" style="color: #00564e;">Đặt lại mật khẩu</a>
                                 </small>
                             </div>
                             @error('username')

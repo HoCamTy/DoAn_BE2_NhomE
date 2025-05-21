@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Models;
-
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Customer extends Model
+class Customer extends Authenticatable
 {
     protected $fillable = [
         'name',
@@ -14,7 +14,7 @@ class Customer extends Model
         'address',
         'create_date' 
     ];
-
+public $timestamps = false;
     protected $casts = [
         'create_date' => 'datetime'
     ];
@@ -23,4 +23,5 @@ class Customer extends Model
     {
         return $this->hasMany(Appointment::class);
     }
+    protected $table = 'customers'; 
 }

@@ -10,25 +10,25 @@ class PasswordResetController extends Controller
 {
     public function showForm()
     {
-        return view('crud_user.password-reset');
+        return view('auth.reset-password');
     }
 
-    public function updatePassword(Request $request)
+    public function handleReset(Request $request)
     {
         $request->validate([
             'email' => 'required|email',
-            'new_password' => 'required|min:6',
+            'new_password' => 'required|min:6|confirmed', // thêm confirmed
         ]);
 
         $user = User::where('email', $request->email)->first();
 
-        if ($user) {
-            $user->password = Hash::make($request->new_password);
-            $user->save();
-
-            return back()->with('message', 'Mật khẩu đã được cập nhật thành công.');
-        } else {
+        if (!$user) {
             return back()->with('message', 'Không tìm thấy email này trong hệ thống.');
         }
+
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        return back()->with('message', 'Mật khẩu đã được cập nhật thành công.');
     }
 }
