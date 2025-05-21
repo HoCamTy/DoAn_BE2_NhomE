@@ -109,23 +109,46 @@ class CrudUserController extends Controller
      * Submit form update user
      */
     public function postUpdateUser(Request $request)
-    {
-        $input = $request->all();
 
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users,id,'.$input['id'],
-            'password' => 'required|min:6',
-        ]);
+{
+    $input = $request->all();
 
-       $user = User::find($input['id']);
-       $user->name = $input['name'];
-       $user->email = $input['email'];
-       $user->password = $input['password'];
-       $user->save();
+    $request->validate([
+        'name' => 'required',
+        'email' => 'required|email|unique:users,email,' . $input['id'],
+        'password' => 'required|min:6',
+    ]);
 
-        return redirect("list")->withSuccess('You have signed-in');
-    }
+    $user = User::find($input['id']);
+    $user->name = $input['name'];
+    $user->email = $input['email'];
+    // Hash mật khẩu khi cập nhật
+    $user->password = Hash::make($input['password']);
+    $user->save();
+
+    return redirect("list")->withSuccess('User updated successfully');
+}
+
+public function showProfile()
+{
+    $user = Auth::user(); // Lấy user hiện tại
+    return view('crud_user.profile', compact('user'));
+}
+
+public function updateProfile(Request $request)
+{
+    $request->validate([
+        'email' => 'required|email|unique:users,email,' . Auth::id(),
+        'phone' => 'nullable|string|max:20',
+    ]);
+
+    $user = Auth::user();
+    $user->email = $request->input('email');  // ✅
+    $user->phone = $request->input('phone');  // ✅
+    $user->save();
+
+    return redirect()->route('profile')->with('success', 'Thông tin đã được cập nhật thành công!');
+}
 
     /**
      * List of users

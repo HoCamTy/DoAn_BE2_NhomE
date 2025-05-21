@@ -44,128 +44,127 @@ class AppointmentController extends Controller
         return view('appointments.index', compact('appointments', 'services', 'staffs'));
     }
 
-    // public function create()
-    // {
-    //     $services = Service::all();
-    //     return view('appointments.create', compact('services'));
-    // }
+ public function create()
+    {
+        $services = Service::all();
+        return view('appointments.create', compact('services'));
+    }
 
-    // public function store(Request $request)
-    // {
-    //     // Validate all input fields
-    //     $validated = $request->validate([
-    //         'customer_name' => 'required|string|max:100',
-    //         'phone' => 'required|string|max:15',
-    //         'email' => 'nullable|email|max:100',
-    //         'address' => 'nullable|string',
-    //         'appointment_date' => 'required|date|after_or_equal:today',
-    //         'appointment_time' => 'required|date_format:H:i',
-    //         'services' => 'required|array|exists:services,id',
-    //         'notes' => 'nullable|string'
-    //     ]);
+    public function store(Request $request)
+    {
+        // Validate all input fields
+        $validated = $request->validate([
+            'customer_name' => 'required|string|max:100',
+            'phone' => 'required|string|max:15',
+            'email' => 'nullable|email|max:100',
+            'address' => 'nullable|string',
+            'appointment_date' => 'required|date|after_or_equal:today',
+            'appointment_time' => 'required|date_format:H:i',
+            'services' => 'required|array|exists:services,id',
+            'notes' => 'nullable|string'
+        ]);
 
-    //     try {
-    //         DB::beginTransaction();
+        try {
+            DB::beginTransaction();
 
-    //         // Check if customer exists or create new one
-    //         $customer = Customer::firstOrCreate(
-    //             ['phone' => $validated['phone']],
-    //             [
-    //                 'customer_name' => $validated['customer_name'],
-    //                 'email' => $validated['email'],
-    //                 'address' => $validated['address'],
-    //             ]
-    //         );
+            // Check if customer exists or create new one
+            $customer = Customer::firstOrCreate(
+                ['phone' => $validated['phone']],
+                [
+                    'customer_name' => $validated['customer_name'],
+                    'email' => $validated['email'],
+                    'address' => $validated['address'],
+                ]
+            );
 
-    //         // Combine date and time
-    //         $appointmentDateTime = Carbon::parse($validated['appointment_date'])
-    //             ->setTimeFromTimeString($validated['appointment_time']);
+            // Combine date and time
+            $appointmentDateTime = Carbon::parse($validated['appointment_date'])
+                ->setTimeFromTimeString($validated['appointment_time']);
 
-    //         // Create appointment
-    //         $appointment = Appointment::create([
-    //             'customer_id' => $customer->id,
-    //             'appointment_date' => $appointmentDateTime,
-    //             'status' => 'pending',
-    //             'notes' => $validated['notes']
-    //         ]);
+            // Create appointment
+            $appointment = Appointment::create([
+                'customer_id' => $customer->id,
+                'appointment_date' => $appointmentDateTime,
+                'status' => 'pending',
+                'notes' => $validated['notes']
+            ]);
 
-    //         // Attach services
-    //         $appointment->services()->attach($validated['services']);
+            // Attach services
+            $appointment->services()->attach($validated['services']);
 
-    //         DB::commit();
+            DB::commit();
 
-    //         return redirect()
-    //             ->route('appointments.index')
-    //             ->with('success', 'Đặt lịch thành công');
-    //     } catch (\Exception $e) {
-    //         DB::rollBack();
-    //         return back()
-    //             ->withInput()
-    //             ->withErrors(['error' => $e->getMessage()]);
-    //     }
-    // }
+            return redirect()
+                ->route('appointments.index')
+                ->with('success', 'Đặt lịch thành công');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()
+                ->withInput()
+                ->withErrors(['error' => $e->getMessage()]);
+        }
+    }
 
-    // public function edit(Appointment $appointment)
-    // {
-    //     $services = Service::all();
-    //     $appointment->load('customer', 'services');
+    public function edit(Appointment $appointment)
+    {
+        $services = Service::all();
+        $appointment->load('customer', 'services');
 
-    //     return view('appointments.edit', compact('appointment', 'services'));
-    // }
+        return view('appointments.edit', compact('appointment', 'services'));
+    }
 
-    // public function update(Request $request, Appointment $appointment)
-    // {
-    //     $validated = $request->validate([
-    //         'customer_name' => 'required|string|max:100',
-    //         'phone' => 'required|string|max:15',
-    //         'email' => 'nullable|email|max:100',
-    //         'address' => 'nullable|string',
-    //         'appointment_date' => 'required|date',
-    //         'appointment_time' => 'required|date_format:H:i',
-    //         'services' => 'required|array|exists:services,id',
-    //         'status' => 'required|in:pending,confirmed,completed,cancelled',
-    //         'notes' => 'nullable|string'
-    //     ]);
+    public function update(Request $request, Appointment $appointment)
+    {
+        $validated = $request->validate([
+            'customer_name' => 'required|string|max:100',
+            'phone' => 'required|string|max:15',
+            'email' => 'nullable|email|max:100',
+            'address' => 'nullable|string',
+            'appointment_date' => 'required|date',
+            'appointment_time' => 'required|date_format:H:i',
+            'services' => 'required|array|exists:services,id',
+            'status' => 'required|in:pending,confirmed,completed,cancelled',
+            'notes' => 'nullable|string'
+        ]);
 
-    //     try {
-    //         DB::beginTransaction();
+        try {
+            DB::beginTransaction();
 
-    //         // Update customer information
-    //         $appointment->customer->update([
-    //             'customer_name' => $validated['customer_name'],
-    //             'phone' => $validated['phone'],
-    //             'email' => $validated['email'],
-    //             'address' => $validated['address']
-    //         ]);
+            // Update customer information
+            $appointment->customer->update([
+                'customer_name' => $validated['customer_name'],
+                'phone' => $validated['phone'],
+                'email' => $validated['email'],
+                'address' => $validated['address']
+            ]);
 
-    //         // Combine date and time
-    //         $appointmentDateTime = Carbon::parse($validated['appointment_date'])
-    //             ->setTimeFromTimeString($validated['appointment_time']);
+            // Combine date and time
+            $appointmentDateTime = Carbon::parse($validated['appointment_date'])
+                ->setTimeFromTimeString($validated['appointment_time']);
 
-    //         // Update appointment
-    //         $appointment->update([
-    //             'appointment_date' => $appointmentDateTime,
-    //             'status' => $validated['status'],
-    //             'notes' => $validated['notes']
-    //         ]);
+            // Update appointment
+            $appointment->update([
+                'appointment_date' => $appointmentDateTime,
+                'status' => $validated['status'],
+                'notes' => $validated['notes']
+            ]);
 
-    //         // Sync services
-    //         $appointment->services()->sync($validated['services']);
+            // Sync services
+            $appointment->services()->sync($validated['services']);
 
-    //         DB::commit();
+            DB::commit();
 
-    //         return redirect()
-    //             ->route('appointments.index')
-    //             ->with('success', 'Cập nhật lịch hẹn thành công');
-    //     } catch (\Exception $e) {
-    //         DB::rollBack();
-    //         return back()
-    //             ->withInput()
-    //             ->withErrors(['error' => 'Có lỗi xảy ra khi cập nhật lịch hẹn: ' . $e->getMessage()]);
-    //     }
-    // }
+            return redirect()
+                ->route('appointments.index')
+                ->with('success', 'Cập nhật lịch hẹn thành công');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()
+                ->withInput()
+                ->withErrors(['error' => 'Có lỗi xảy ra khi cập nhật lịch hẹn: ' . $e->getMessage()]);
+        }
+    }
     
-//////tới đây
     public function destroy(Appointment $appointment)
     {
         try {
