@@ -1,1 +1,27 @@
 
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Staff;
+
+class StaffController extends Controller
+{
+     
+
+    public function create() {
+        return view('staffs.create');
+    }
+
+    public function store(Request $request) {
+        $request->validate([
+            'staff_name' => 'required',
+            'staff_phone' => 'required|unique:staffs',
+            'email' => 'nullable|email',
+        ]);
+        Staff::create($request->all());
+        return redirect()->route('staffs.index')->with('success', 'Thêm thành công');
+    }
+   
+}
