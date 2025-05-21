@@ -11,7 +11,7 @@ use App\Http\Controllers\CustomerRatingController;
 use App\Http\Controllers\PasswordResetController;
 
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Controllers\CustomerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,6 +22,14 @@ use Illuminate\Support\Facades\Auth;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::prefix('admin')->group(function () {
+    Route::resource('customers', CustomerController::class);
+});
+
+
+Route::get('/admin/customers', [CustomerController::class, 'index'])->name('customers.index');
+
 
 // Public routes
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');

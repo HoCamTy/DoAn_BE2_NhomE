@@ -11,14 +11,14 @@
             <ul class="navbar-nav ms-auto">
                 @if (Auth::guard('web')->check() || Auth::guard('customer')->check())
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ route('profile') }}">
-    <i class="fas fa-user"></i>
-    @if (Auth::guard('customer')->check())
-        {{ Auth::guard('customer')->user()->customer_name }}
-    @else
-        {{ Auth::guard('web')->user()->name }}
-    @endif
-</a>
+                        <a class="nav-link text-white" href="">
+                            <i class="fas fa-user"></i>
+                            @if (Auth::guard('customer')->check())
+                                {{ Auth::guard('customer')->user()->customer_name }}
+                            @else
+                                {{ Auth::guard('web')->user()->name }}
+                            @endif
+                        </a>
                     </li>
                     <li class="nav-item">
                         <form method="POST" action="{{ route('logout') }}" class="d-inline">

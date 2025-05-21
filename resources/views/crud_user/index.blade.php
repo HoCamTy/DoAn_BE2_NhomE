@@ -16,10 +16,10 @@
         <a href="{{ route('signout') }}">Logout</a>
         @endguest
     </div>
-    <h1>Chào mừng bạn đến với trang web</h1>
+    <h1>Chào mừng bạn đến với trang web    </h1>
 
     <div class="footer">
-        Lập trình web @01/2024
+        Lập trình web @01/2024 
     </div>
 </body>
 </html>

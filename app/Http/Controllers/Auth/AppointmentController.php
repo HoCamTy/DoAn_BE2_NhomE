@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
+
 class AppointmentController extends Controller
 {
     public function index(Request $request)
@@ -49,7 +50,6 @@ class AppointmentController extends Controller
         $services = Service::all();
         return view('appointments.create', compact('services'));
     }
-
     public function store(Request $request)
     {
         // Validate all input fields
@@ -164,8 +164,6 @@ class AppointmentController extends Controller
                 ->withErrors(['error' => 'Có lỗi xảy ra khi cập nhật lịch hẹn: ' . $e->getMessage()]);
         }
     }
-    
-////tới đây
     public function destroy(Appointment $appointment)
     {
         try {
