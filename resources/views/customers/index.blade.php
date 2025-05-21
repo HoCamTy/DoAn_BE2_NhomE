@@ -112,7 +112,7 @@
         @forelse ($customers as $index => $customer)
             <tr>
                 <td>{{ ($page - 1) * $limit + $index + 1 }}</td>
-                 <td>{{ $customer->name }}</td>
+                <td>{{ $customer->customer_name }}</td>
                 <td>{{ $customer->phone }}</td>
                 <td>{{ $customer->email }}</td>
                 <td>{{ $customer->address }}</td>
