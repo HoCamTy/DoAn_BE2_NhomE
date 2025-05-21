@@ -12,6 +12,7 @@ use App\Http\Controllers\PasswordResetController;
 
 use Illuminate\Support\Facades\Auth;
 
+use App\Http\Controllers\CustomerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,6 +42,14 @@ Route::middleware(['auth:customer'])->prefix('customer')->group(function () {
     Route::get('/my-appointments', [AppointmentController::class, 'myAppointments'])->name('customer.appointments');
     // ...
 });
+
+Route::prefix('admin')->group(function () {
+    Route::resource('customers', CustomerController::class);
+});
+
+
+Route::get('/admin/customers', [CustomerController::class, 'index'])->name('customers.index');
+
 
 // Public routes
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -91,6 +100,7 @@ Route::get('/', function () {
 
 Route::get('/profile', [CrudUserController::class, 'showProfile'])->name('profile');
 Route::post('/profile', [CrudUserController::class, 'updateProfile']);
+
 
 Route::get('/password/reset', [PasswordResetController::class, 'showForm'])->name('password.form');
 Route::post('/password/reset', [PasswordResetController::class, 'handleReset'])->name('password.reset');
