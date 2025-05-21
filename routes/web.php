@@ -12,7 +12,7 @@ use App\Http\Controllers\PasswordResetController;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\CustomerRating;
-
+use App\Http\Controllers\StaffController;
 use App\Http\Controllers\CustomerController;
 /*
 |--------------------------------------------------------------------------
@@ -69,6 +69,8 @@ Route::middleware(['checkauth'])->prefix('admin')->group(function () {
     Route::resource('appointments', AppointmentController::class);
     // Other admin routes
 });
+
+Route::resource('staffs', StaffController::class);
 
 // Protected customer routes
 Route::middleware(['checkauth'])->prefix('customer')->group(function () {
