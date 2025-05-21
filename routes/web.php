@@ -13,6 +13,8 @@ use App\Http\Controllers\PasswordResetController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\CustomerRating;
 
+use App\Http\Controllers\StaffController;
+
 use App\Http\Controllers\CustomerController;
 /*
 |--------------------------------------------------------------------------
@@ -86,6 +88,8 @@ Route::middleware(['checkauth'])->prefix('customer')->group(function () {
     // Other customer routes
 });
 
+
+Route::resource('staffs', StaffController::class);
 // Home route
 Route::get('/', function () {
     if (Auth::guard('web')->check()) {
