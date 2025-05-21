@@ -44,7 +44,7 @@ class AppointmentController extends Controller
         return view('appointments.index', compact('appointments', 'services', 'staffs'));
     }
 
-    public function create()
+ public function create()
     {
         $services = Service::all();
         return view('appointments.create', compact('services'));
@@ -165,7 +165,6 @@ class AppointmentController extends Controller
         }
     }
     
-////tới đây
     public function destroy(Appointment $appointment)
     {
         try {

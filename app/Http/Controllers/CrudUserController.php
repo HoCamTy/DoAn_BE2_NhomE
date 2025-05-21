@@ -109,6 +109,7 @@ class CrudUserController extends Controller
      * Submit form update user
      */
     public function postUpdateUser(Request $request)
+
 {
     $input = $request->all();
 
@@ -148,6 +149,7 @@ public function updateProfile(Request $request)
 
     return redirect()->route('profile')->with('success', 'Thông tin đã được cập nhật thành công!');
 }
+
     /**
      * List of users
      */
