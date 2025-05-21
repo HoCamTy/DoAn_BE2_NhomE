@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\CustomerRating;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,3 +64,6 @@ Route::get('/', function () {
     }
     return redirect()->route('login');
 })->name('home');
+Route::get('/ratings/create', [CustomerRatingController::class, 'create'])->name('ratings.create');
+Route::post('/ratings', [CustomerRatingController::class, 'store'])->name('ratings.store');
+Route::get('/ratings', [CustomerRatingController::class, 'index'])->name('ratings.index');

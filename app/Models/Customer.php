@@ -22,6 +22,7 @@ class Customer extends Authenticatable
     protected $casts = [
         'create_date' => 'datetime'
     ];
+    protected $table = 'customerrs'; 
     public function appointments()
     {
         return $this->hasMany(Appointment::class);
