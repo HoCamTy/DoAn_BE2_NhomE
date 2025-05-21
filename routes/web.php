@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +53,11 @@ Route::middleware(['checkauth'])->prefix('customer')->group(function () {
         ->name('customer.appointments.store');
     // Other customer routes
 });
+
+
+Route::get('/register11', [AuthController::class, 'showRegisterForm'])->name('register.form');
+Route::post('/register11', [AuthController::class, 'register'])->name('user.postUser');
+
 
 // Home route
 Route::get('/', function () {

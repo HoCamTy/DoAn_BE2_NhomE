@@ -18,7 +18,7 @@ class Customer extends Authenticatable
         'password',
         'create_date'
     ];
-
+public $timestamps = false;
     protected $casts = [
         'create_date' => 'datetime'
     ];
