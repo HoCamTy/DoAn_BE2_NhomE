@@ -12,14 +12,8 @@ class CustomerRating extends Model
 
     protected $fillable = ['customer_id', 'service_rating', 'comments'];
 
-    public $timestamps = false; 
-
     public function customer()
     {
         return $this->belongsTo(Customer::class);
     }
-    protected $casts = [
-    'created_at' => 'datetime',
-    
-];
-}
+};

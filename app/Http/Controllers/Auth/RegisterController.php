@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Customer;
-use App\Models\User;
+use App\Models\User;  // đổi sang User
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -16,26 +15,23 @@ class RegisterController extends Controller
     }
 
     public function register(Request $request)
-    {
-        $validated = $request->validate([
-            'phone' => ['required', 'string', 'regex:/^[0-9]{10}$/', 'unique:customers,phone'],
-            'email' => 'required|string|email|max:255|unique:customers,email',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
+{
+    $validated = $request->validate([
+        'username' => 'required|string|unique:users,username',
+        'email' => 'required|string|email|unique:users,email',
+        'phone' => 'required|string',   // thêm dòng này
+        'password' => 'required|string|min:8|confirmed',
+    ]);
 
-        try {
-            Customer::create([
-                'phone' => $validated['phone'],
-                'email' => $validated['email'],
-                'password' => Hash::make($validated['password']),
-            ]);
+    User::create([
+        'username' => $validated['username'],
+        'email' => $validated['email'],
+           'phone' => $validated['phone'],  // nhớ thêm vào đây luôn
+        'password' => Hash::make($validated['password']),
+    ]);
 
-            return redirect()->intended('login')->with('message', 'Đăng ký thành công. Vui lòng đăng nhập.'); 
-        } catch (\Exception $e) {
-            dd($e->getMessage());
-            return back()
-                ->withInput($request->except('password'))
-                ->withErrors(['error' => 'Có lỗi xảy ra khi đăng ký.']);
-        }
-    }
+    return redirect()->route('login')->with('success', 'Đăng ký thành công!');
 }
+
+}
+

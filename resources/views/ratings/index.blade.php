@@ -33,5 +33,29 @@
         @endif
     </div>
 </div>
+
+<style>
+    .rating-container {
+        max-width: 800px;
+        margin: 50px auto;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+    }
+
+    .stars {
+        color: #f39c12;
+    }
+
+    .rating-item {
+        margin-bottom: 20px;
+    }
+
+    .rating-item .comment {
+        font-style: italic;
+        color: #6c757d;
+    }
+</style>
 @endsection
 

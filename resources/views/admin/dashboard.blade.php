@@ -21,15 +21,18 @@
                 </div>
             </a>
         </div>
+       
         <!-- Khách Hàng -->
-        <div class="col-md-6">
-            <a href="" class="card-link">
-                <div class="card shadow">
-                    <img src="{{ asset('images/khachhang.jpg') }}" alt="Customer">
-                    <h5 class="card-title">Khách Hàng</h5>
-                </div>
-            </a>
+<div class="col-md-6">
+    <a href="{{ route('customers.index') }}" class="card-link">
+        <div class="card shadow">
+            <img src="{{ asset('images/khachhang.jpg') }}" alt="Customer">
+            <h5 class="card-title">Khách Hàng</h5>
         </div>
+    </a>
+</div>
+
+        
         <!-- Thanh Toán -->
         <div class="col-md-6">
             <a href="" class="card-link">
@@ -41,7 +44,7 @@
         </div>
         <!-- Đánh giá -->
         <div class="col-md-6">
-            <a href="" class="card-link">
+           <a href="{{ route('ratings.create') }}" class="card-link">
                 <div class="card shadow custom-card">
                     <img src="{{ asset('images/dgia.jpg') }}" alt="danhgia" class="img-fluid">
                     <h5 class="card-title">Đánh giá</h5>
