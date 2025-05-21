@@ -70,7 +70,6 @@ class CrudUserController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password'])
         ]);
-        
 
         return redirect("login");
     }
@@ -127,7 +126,6 @@ class CrudUserController extends Controller
 
         return redirect("list")->withSuccess('You have signed-in');
     }
-    
 
     /**
      * List of users
