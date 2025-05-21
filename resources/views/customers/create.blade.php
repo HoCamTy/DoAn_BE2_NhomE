@@ -37,8 +37,8 @@
                 </div>
             @endif
 
-            <label for="name">Tên khách hàng</label>
-            <input type="text" name="name" id="name" value="{{ old('name') }}" required>
+            <label for="customer_name">Tên khách hàng</label>
+<input type="text" name="customer_name" id="customer_name" value="{{ old('customer_name') }}" required>
 
             <label for="phone">Số điện thoại</label>
             <input type="text" name="phone" id="phone" value="{{ old('phone') }}">

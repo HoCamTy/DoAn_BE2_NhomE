@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Customer extends Authenticatable
 {
     protected $fillable = [
-        'name',
+        'customer_name',
         'phone',
         'email',
         'address',

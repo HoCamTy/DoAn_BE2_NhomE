@@ -16,7 +16,7 @@ class CustomerController extends Controller
 
         $query = Customer::query();
         if ($search) {
-            $query->where('name', 'like', "%$search%");
+            $query->where('customer_name', 'like', "%$search%");
         }
 
         $totalCustomers = $query->count();
@@ -34,7 +34,7 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
+            'customer_name' => 'required|string|max:255',
             'phone' => 'nullable|string|max:20',
             'email' => 'nullable|email|max:255',
             'address' => 'nullable|string|max:255',
@@ -54,14 +54,14 @@ class CustomerController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'customer_name' => 'required|string|max:255',
             'phone' => 'nullable|string|max:20',
             'email' => 'nullable|email',
             'address' => 'nullable|string',
         ]);
 
         $customer = Customer::findOrFail($id);
-        $customer->update($request->only('name', 'phone', 'email', 'address'));
+        $customer->update($request->only('customer_name', 'phone', 'email', 'address'));
 
         return redirect()->route('customers.index')->with('success', 'Cập nhật thành công');
     }
