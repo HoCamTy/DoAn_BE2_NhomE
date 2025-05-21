@@ -75,7 +75,8 @@ Route::post('/profile', [CrudUserController::class, 'updateProfile']);
 
 
 Route::get('/password/reset', [PasswordResetController::class, 'showForm'])->name('password.form');
-Route::post('/password/reset', [PasswordResetController::class, 'reset'])->name('password.reset');
+Route::post('/password/reset', [PasswordResetController::class, 'handleReset'])->name('password.reset');
+
 
 
 Route::get('/ratings/create', [CustomerRatingController::class, 'create'])->name('ratings.create');
