@@ -1,19 +1,25 @@
 <?php
 
-// app/Models/CustomerRating.php
-namespace App\Models;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-
-class CustomerRating extends Model
+return new class extends Migration
 {
-    use HasFactory;
-
-    protected $fillable = ['customer_id', 'service_rating', 'comments'];
-
-    public function customer()
+    public function up(): void
     {
-        return $this->belongsTo(Customer::class);
+        Schema::create('customer_ratings', function (Blueprint $table) {
+            $table->id();
+            $table->integer('customer_id');
+            $table->text('comments');
+            $table->float('service_rating');
+            $table->timestamps();
+        });
+
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('customer_ratings');
     }
 };

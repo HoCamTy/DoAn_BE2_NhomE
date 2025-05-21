@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;  // đổi sang User
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -15,23 +15,21 @@ class RegisterController extends Controller
     }
 
     public function register(Request $request)
-{
-    $validated = $request->validate([
-        'username' => 'required|string|unique:users,username',
-        'email' => 'required|string|email|unique:users,email',
-        'phone' => 'required|string',   // thêm dòng này
-        'password' => 'required|string|min:8|confirmed',
-    ]);
+    {
+        $validated = $request->validate([
+            'email' => 'required|string|email|unique:users,email',
+            'phone' => 'required|string',  
+            'password' => 'required|string|min:8|confirmed',
+        ]);
 
-    User::create([
-        'username' => $validated['username'],
-        'email' => $validated['email'],
-           'phone' => $validated['phone'],  // nhớ thêm vào đây luôn
-        'password' => Hash::make($validated['password']),
-    ]);
+        Customer::create([
+            'email' => $validated['email'],
+            'phone' => $validated['phone'], 
+            'password' => Hash::make($validated['password']),
+        ]);
 
-    return redirect()->route('login')->with('success', 'Đăng ký thành công!');
-}
+        return redirect()->route('login')->with('success', 'Đăng ký thành công!');
+    }
 
 }
 

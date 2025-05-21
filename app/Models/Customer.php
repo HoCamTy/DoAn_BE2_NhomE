@@ -18,7 +18,6 @@ public $timestamps = false;
     protected $casts = [
         'create_date' => 'datetime'
     ];
-    protected $table = 'customerrs'; 
     public function appointments(): HasMany
 
     {
