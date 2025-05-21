@@ -108,7 +108,7 @@
                     @forelse ($appointments as $index => $appointment)
                         <tr>
                             <td>{{ $index + 1 }}</td>
-                            <td>{{ $appointment->customer->customer_name }}</td>
+                          <td>{{ $appointment->customer->customer_name }}</td>
                             <td>{{ $appointment->customer->phone }}</td>
                             <td>
                                 {{ $appointment->appointment_date->format('d/m/Y H:i') }}
