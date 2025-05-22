@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth; 
 
 class CustomerController extends Controller
 {
@@ -44,7 +45,31 @@ class CustomerController extends Controller
 
         return redirect()->route('customers.index')->with('success', 'Thêm khách hàng thành công!');
     }
+    public function showProfile()
+{
+    $customer = Auth::guard('customer')->user();
 
+    if (!$customer) {
+        return redirect()->route('login')->with('error', 'Bạn cần đăng nhập trước.');
+    }
+
+    return view('crud_user.profile', compact('customer'));
+}
+public function updateProfile(Request $request)
+{
+    $customer = Auth::guard('customer')->user();
+
+    $request->validate([
+        'email' => 'required|email|unique:customers,email,' . $customer->id,
+        'phone' => 'nullable|string|max:20',
+    ]);
+
+    $customer->email = $request->input('email');
+    $customer->phone = $request->input('phone');
+    $customer->save();
+
+    return redirect()->route('profile')->with('message', 'Thông tin đã được cập nhật thành công!');
+}
     public function edit($id)
     {
         $customer = Customer::findOrFail($id); 
