@@ -53,17 +53,23 @@ class StaffController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
+    public function edit($id) {
+        $staff = Staff::findOrFail($id);
+        return view('staffs.edit', compact('staff'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
+    public function update(Request $request, $id) {
+        $staff = Staff::findOrFail($id);
+        $request->validate([
+            'staff_name' => 'required',
+            'staff_phone' => 'required|unique:staffs,staff_phone,' . $id,
+            'email' => 'nullable|email',
+        ]);
+        $staff->update($request->all());
+        return redirect()->route('staffs.index')->with('success', 'Cập nhật thành công');
     }
 
     /**
