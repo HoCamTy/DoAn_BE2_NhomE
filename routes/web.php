@@ -90,15 +90,18 @@ Route::middleware(['checkauth'])->prefix('customer')->group(function () {
 });
 
 // Home route
-Route::get('/', function () {
-    if (Auth::guard('web')->check()) {
-        return redirect()->route('admin.dashboard');
-    }
-    if (Auth::guard('customer')->check()) {
-        return redirect()->route('customer.dashboard');
-    }
-    return redirect()->route('login');
-})->name('home');
+// Route::get('/', function () {
+//     if (Auth::guard('web')->check()) {
+//         return redirect()->route('admin.dashboard');
+//     }
+//     if (Auth::guard('customer')->check()) {
+//         return redirect()->route('customer.dashboard');
+//     }
+//     return redirect()->route('login');
+// })->name('home');
+Route::get('/', [CrudUserController::class, 'index'])->name('index');
+Route::get('create', [CrudUserController::class, 'createUser'])->name('user.createUser');
+
 
 // Profile routes
     
@@ -109,10 +112,7 @@ Route::post('/profile', [CustomerController::class, 'updateProfile'])->name('pro
 // Nếu bạn dùng resource controller:
 Route::resource('customers', CustomerController::class);
 
-// Hoặc nếu bạn dùng tay:
 
-Route::get('/profile', [CustomerController::class, 'showProfile'])->name('profile');
-Route::post('/profile', [CustomerController::class, 'updateProfile'])->name('profile.update');
 
 // Đăng xuất
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');

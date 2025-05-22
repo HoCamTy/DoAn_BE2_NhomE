@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Hash;
 use Session;
 use App\Models\User;
+use App\Models\Category;
+use App\Models\Service;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,9 +16,18 @@ use Illuminate\Support\Facades\Auth;
  */
 class CrudUserController extends Controller
 {
-    public function index()
+   public function index()
     {
-        return view('crud_user.index'); 
+        $categories = Category::orderBy('create_date', 'desc')->get();
+
+        // Truy vấn tất cả services
+        $services = Service::orderBy('create_date', 'desc')->get();
+
+        // truy van user
+        $users = User::orderBy('created_at', 'desc')->get();
+
+        return view('crud_user.index', compact('categories', 'services','users'));
+
     }
     /**
      * Login page
