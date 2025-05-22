@@ -16,18 +16,20 @@
             text-align: center;
         }
         .footer {
-            background-color: #212529;
+            background-color: #00564e;
             color: white;
             text-align: center;
             padding: 20px 0;
+        }
+        .navbar{
+            background-color: #00564e;
         }
     </style>
 </head>
 <body>
 
 <!-- Navbar -->
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
         <a class="navbar-brand" href="/">Trang chủ</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
