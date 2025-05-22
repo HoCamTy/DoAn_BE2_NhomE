@@ -118,7 +118,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 
-
+//datlaimatkhau
 
 Route::get('/password/reset', [PasswordResetController::class, 'showForm'])->name('password.form');
 Route::post('/password/reset', [PasswordResetController::class, 'handleReset'])->name('password.reset');

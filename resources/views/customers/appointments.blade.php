@@ -45,13 +45,13 @@
                                 @elseif($appointment->status == 'completed')
                                     <span class="badge bg-success">Đã hoàn thành</span>
                                 @elseif($appointment->status == 'cancelled')
-                                    <span class="badge bg-danger">Đã hủy</span>
+                                    <span class="badge bg-danger">Đã hủy thành công</span>
                                 @endif
                             </td>
                             <td>
                                 @if ($appointment->status != 'completed' && $appointment->status != 'cancelled')
                                     <form action="{{ route('customer.appointments.cancel', $appointment) }}" method="POST"
-                                        onsubmit="return confirm('Bạn có chắc muốn hủy lịch hẹn này?')">
+                                        onsubmit="return confirm('Bạn có muốn hủy lịch hẹn này?')">
                                         @csrf
                                         <button type="submit" class="btn btn-danger btn-sm">
                                             <i class="fas fa-times"></i> Hủy lịch
