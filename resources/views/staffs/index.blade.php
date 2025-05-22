@@ -84,7 +84,7 @@
 
     <!-- Hiển thị liên kết phân trang -->
     <div class="d-flex justify-content-center">
-        {{ $staffs->withQueryString()->links() }}
+        {{ $staffs->links() }}
     </div>
 </div>
 @endsection
