@@ -3,16 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Staff;
 
 class StaffController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
+    public function index(Request $request) {
+        $keyword = $request->input('keyword');
+
+        $staffs = Staff::when($keyword, function ($query, $keyword) {
+                return $query->where('staff_name', 'like', "%$keyword%")
+                            ->orWhere('staff_phone', 'like', "%$keyword%")
+                            ->orWhere('email', 'like', "%$keyword%");
+            })
+            ->orderBy('id', 'desc')
+            ->paginate(5);
+
+    return view('staffs.index', compact('staffs'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -22,14 +30,18 @@ class StaffController extends Controller
     }
 
     public function store(Request $request) {
-        $request->validate([
-            'staff_name' => 'required',
-            'staff_phone' => 'required|unique:staffs',
-            'email' => 'nullable|email',
-        ]);
-        Staff::create($request->all());
-        return redirect()->route('staffs.index')->with('success', 'Thêm thành công');
-    }
+    $request->validate([
+        'staff_name' => 'required',
+        'staff_phone' => 'required|unique:staffs',
+        'email' => 'nullable|email',
+    ]);
+
+    $data = $request->except('_token');
+    Staff::query()->create($data);
+
+    return redirect()->route('staffs.index')->with('success', 'Thêm thành công');
+}
+
     /**
      * Display the specified resource.
      */

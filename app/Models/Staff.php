@@ -10,5 +10,14 @@ class Staff extends Model
     use HasFactory;
 
     
-    protected $table = 'staff';
+    protected $table = 'staffs';
+
+    protected $fillable = [
+        'staff_name',
+        'staff_phone',
+        'email',
+        'create_date'
+    ];
+
+    public $timestamps = false; 
 }
