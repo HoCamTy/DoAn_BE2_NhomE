@@ -9,7 +9,7 @@
 <body>
     <div class="container mt-5">
         <!-- Quay lại trang dashboard -->
-        <a href="{{ url('/dashboard') }}" class="btn btn-secondary mb-3">&larr; Quay Lại</a>
+        <a href="{{ route('home') }}" class="btn btn-secondary mb-3">&larr; Quay Lại</a>
         
         <h2>Thông Tin Cá Nhân</h2>
 
