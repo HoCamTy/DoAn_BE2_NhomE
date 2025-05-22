@@ -23,7 +23,7 @@ class PasswordResetController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if (!$user) {
-            return back()->with('message', 'Không tìm thấy email này trong hệ thống.');
+            return back()->with('message', 'Không tìm thấy Email này trong hệ thống.');
         }
 
         $user->password = Hash::make($request->new_password);

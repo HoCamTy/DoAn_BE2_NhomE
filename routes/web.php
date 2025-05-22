@@ -103,7 +103,7 @@ Route::get('/', function () {
 Route::get('/profile', [CrudUserController::class, 'showProfile'])->name('profile');
 Route::post('/profile', [CrudUserController::class, 'updateProfile']);
 
-
+//rest-password
 Route::get('/password/reset', [PasswordResetController::class, 'showForm'])->name('password.form');
 Route::post('/password/reset', [PasswordResetController::class, 'handleReset'])->name('password.reset');
 

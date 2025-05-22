@@ -40,7 +40,7 @@
                         <input type="password" name="new_password_confirmation" id="new_password_confirmation" class="form-control rounded-pill" required>
                     </div>
 
-                    <button type="submit" class="btn btn-green w-100 rounded-pill mt-2">Cập nhật mật khẩu</button>
+                    <button type="submit" class="btn btn-green w-100 rounded-pill mt-2">Cập nhật lại mật khẩu</button>
                 </form>
 
                 <div class="text-center mt-3">
