@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\CustomerRating;
 
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\StaffController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,6 +48,7 @@ Route::middleware(['auth:customer'])->prefix('customer')->group(function () {
 
 Route::prefix('admin')->group(function () {
     Route::resource('customers', CustomerController::class);
+    Route::resource('staffs', StaffController::class);
 });
 
 

@@ -17,19 +17,19 @@ class StaffController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
+    public function create() {
+        return view('staffs.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) {
+        $request->validate([
+            'staff_name' => 'required',
+            'staff_phone' => 'required|unique:staffs',
+            'email' => 'nullable|email',
+        ]);
+        Staff::create($request->all());
+        return redirect()->route('staffs.index')->with('success', 'Thêm thành công');
     }
-
     /**
      * Display the specified resource.
      */
