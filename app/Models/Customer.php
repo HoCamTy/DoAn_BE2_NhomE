@@ -12,7 +12,8 @@ class Customer extends Authenticatable
         'phone',
         'email',
         'address',
-        'create_date' 
+        'create_date', 
+        'password'
     ];
 public $timestamps = false;
     protected $casts = [
