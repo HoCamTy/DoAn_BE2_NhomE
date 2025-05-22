@@ -100,8 +100,25 @@ Route::get('/', function () {
 // Profile routes
     
 
-Route::get('/profile', [CrudUserController::class, 'showProfile'])->name('profile');
-Route::post('/profile', [CrudUserController::class, 'updateProfile']);
+Route::get('/profile', [CustomerController::class, 'showProfile'])->name('profile');
+
+Route::post('/profile', [CustomerController::class, 'updateProfile'])->name('profile.update');
+// Nếu bạn dùng resource controller:
+Route::resource('customers', CustomerController::class);
+
+// Hoặc nếu bạn dùng tay:
+Route::get('/customers', [CustomerController::class, 'index'])->name('customers.index');
+Route::put('/customers/{id}', [CustomerController::class, 'update'])->name('customers.update');
+Route::get('/profile', [CustomerController::class, 'showProfile'])->name('profile');
+Route::post('/profile', [CustomerController::class, 'updateProfile'])->name('profile.update');
+
+// Đăng xuất
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout'); // Hoặc đúng controller bạn dùng
+
+
+
+
+
 
 
 Route::get('/password/reset', [PasswordResetController::class, 'showForm'])->name('password.form');

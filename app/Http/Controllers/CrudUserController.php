@@ -129,26 +129,7 @@ class CrudUserController extends Controller
     return redirect("list")->withSuccess('User updated successfully');
 }
 
-public function showProfile()
-{
-    $user = Auth::user(); // Lấy user hiện tại
-    return view('crud_user.profile', compact('user'));
-}
 
-public function updateProfile(Request $request)
-{
-    $request->validate([
-        'email' => 'required|email|unique:users,email,' . Auth::id(),
-        'phone' => 'nullable|string|max:20',
-    ]);
-
-    $user = Auth::user();
-    $user->email = $request->input('email');  // ✅
-    $user->phone = $request->input('phone');  // ✅
-    $user->save();
-
-    return redirect()->route('profile')->with('success', 'Thông tin đã được cập nhật thành công!');
-}
 
     /**
      * List of users

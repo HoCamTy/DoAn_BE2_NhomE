@@ -1,36 +1,47 @@
-@extends('layouts.app') {{-- Nếu bạn có layout, nếu không thì bỏ dòng này --}}
+@extends('layouts.app')
 
 @section('content')
 <div class="container mt-5">
-    <h2>Thông Tin Cá Nhân</h2>
+    <a href="{{ route('customers.index') }}" class="btn btn-secondary mb-3">&larr; Quay Lại</a>
 
-    @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
+    <h2>Thông Tin Khách Hàng</h2>
+
+    @if(session('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
     @endif
 
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">Xin chào, {{ $user->name }}!</h5>
-            <p class="card-text"><strong>Email:</strong> {{ $user->email }}</p>
-            <p class="card-text"><strong>Số điện thoại:</strong> {{ $user->phone ?? 'Chưa có số điện thoại' }}</p>
+            <h5>Xin chào</h5>
+            <p class="card-text"><strong>Email:</strong> {{ $customer->email }}</p>
+            <p class="card-text"><strong>Số điện thoại:</strong> {{ $customer->phone ?? 'Chưa có số điện thoại' }}</p>
 
-            <form method="POST" action="{{ url('/profile') }}">
-                @csrf
-                <div class="mb-3">
-                    <label class="form-label">Thay đổi email</label>
-                    <input type="email" name="email" value="{{ old('email', $user->email) }}" class="form-control">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Thay đổi số điện thoại</label>
-                    <input type="text" name="phone" value="{{ old('phone', $user->phone) }}" class="form-control">
-                </div>
-                <button type="submit" class="btn btn-primary">Cập nhật thông tin</button>
-            </form>
-
-            <a href="{{ route('logout') }}" class="btn btn-danger mt-3"
-               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Đăng xuất</a>
-
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+           <form action="{{ route('profile.update') }}" method="POST">
+    @csrf
+    <div class="mb-3">
+        <label for="email" class="form-label">Thay đổi email</label>
+        <input type="email" id="email" name="email" class="form-control" value="{{ old('email', $customer->email) }}" required>
+        @error('email')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
+    </div>
+    <div class="mb-3">
+        <label for="phone" class="form-label">Thay đổi số điện thoại</label>
+        <input type="text" id="phone" name="phone" class="form-control" value="{{ old('phone', $customer->phone) }}">
+        @error('phone')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
+    </div>
+    <button type="submit" class="btn btn-primary">Cập nhật thông tin</button>
+</form>
+            <a href="{{ route('logout') }}"
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                class="btn btn-danger mt-3">
+                Đăng xuất
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
         </div>
