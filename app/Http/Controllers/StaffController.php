@@ -57,8 +57,8 @@ class StaffController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        //
+    public function destroy($id) {
+        Staff::destroy($id);
+        return redirect()->route('staffs.index')->with('success', 'Xóa thành công');
     }
 }
