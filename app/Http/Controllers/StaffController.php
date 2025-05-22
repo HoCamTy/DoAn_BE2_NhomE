@@ -32,11 +32,14 @@ class StaffController extends Controller
     public function store(Request $request) {
     $request->validate([
         'staff_name' => 'required',
-        'staff_phone' => 'required|unique:staffs',
+        'staff_phone' => 'required|unique:staffs,staff_phone',
         'email' => 'nullable|email',
     ]);
 
     $data = $request->except('_token');
+    $data = $request->only(['staff_name',
+ 'staff_phone',
+'email']);
     Staff::query()->create($data);
 
     return redirect()->route('staffs.index')->with('success', 'Thêm thành công');
