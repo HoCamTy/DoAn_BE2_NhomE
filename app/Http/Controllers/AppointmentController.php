@@ -12,36 +12,40 @@ use Illuminate\Support\Facades\Auth;
 
 class AppointmentController extends Controller
 {
-    public function index(Request $request)
+   public function index(Request $request)
     {
-        $query = Appointment::with(['customer', 'services']);
+        // Build the query
+        $query = Appointment::with(['customer', 'services'])
+            ->latest();
 
-        // Apply date filter
+        // Filter by date if provided
         if ($request->filled('date')) {
             $query->whereDate('appointment_date', $request->date);
         }
 
-        // Apply status filter
+        // Filter by status if provided
         if ($request->filled('status')) {
             $query->where('status', $request->status);
         }
 
-        // Apply service filter
+        // Filter by service if provided
         if ($request->filled('service_id')) {
             $query->whereHas('services', function ($q) use ($request) {
                 $q->where('services.id', $request->service_id);
             });
         }
 
-        // Apply staff filter
-        if ($request->filled('staff_id')) {
-            $query->where('staff_id', $request->staff_id);
-        }
-        $appointments = $query->latest()->paginate(10);
+        // Get the per page value from request or use default
+        $perPage = $request->input('perPage', 10);
+
+        // Get paginated results
+        $appointments = $query->paginate($perPage)
+            ->withQueryString(); // Keeps other query parameters in pagination links
+
+        // Get all services for filter dropdown
         $services = Service::all();
-        // $staffs = Staff::all();
-        $staffs = null;
-        return view('appointments.index', compact('appointments', 'services', 'staffs'));
+
+        return view('appointments.index', compact('appointments', 'services'));
     }
 
  public function create()

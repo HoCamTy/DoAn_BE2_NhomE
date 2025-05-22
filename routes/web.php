@@ -24,15 +24,15 @@ use App\Http\Controllers\CustomerController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-// admin routes
-Route::middleware(['auth:web'])->prefix('admin')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
+// // admin routes
+// Route::middleware(['auth:web'])->prefix('admin')->group(function () {
+//     Route::get('/dashboard', function () {
+//         return view('admin.dashboard');
+//     })->name('admin.dashboard');
 
-    Route::resource('services', ServiceController::class);
-    Route::resource('appointments', AppointmentController::class);
-});
+//     Route::resource('services', ServiceController::class);
+//     // Route::resource('appointments', AppointmentController::class);
+// });
 
 // customer routes
 Route::middleware(['auth:customer'])->prefix('customer')->group(function () {
