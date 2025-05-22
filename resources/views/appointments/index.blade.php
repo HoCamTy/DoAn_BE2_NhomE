@@ -107,8 +107,8 @@
                 <tbody>
                     @forelse ($appointments as $index => $appointment)
                         <tr>
-                            <td>{{ $index + 1 }}</td>
-                          <td>{{ $appointment->customer->customer_name }}</td>
+                            <td>{{ $appointments->firstItem() + $index }}</td>
+                            <td>{{ $appointment->customer->customer_name }}</td>
                             <td>{{ $appointment->customer->phone }}</td>
                             <td>
                                 {{ $appointment->appointment_date->format('d/m/Y H:i') }}
@@ -162,6 +162,56 @@
                 </tbody>
             </table>
         </div>
+         <!-- Replace the existing pagination section -->
+        <nav>
+            <ul class="pagination justify-content-center">
+                {{-- First Page Link --}}
+                <li class="page-item {{ $appointments->onFirstPage() ? 'disabled' : '' }}">
+                    <a class="page-link" href="{{ $appointments->url(1) }}" aria-label="First">
+                        &laquo;
+                    </a>
+                </li>
+
+                {{-- Previous Page Link --}}
+                <li class="page-item {{ $appointments->onFirstPage() ? 'disabled' : '' }}">
+                    <a class="page-link" href="{{ $appointments->previousPageUrl() }}" aria-label="Previous">
+                        &lt;
+                    </a>
+                </li>
+
+                {{-- Pagination Elements --}}
+                @for ($i = 1; $i <= $appointments->lastPage(); $i++)
+                    <li class="page-item {{ $appointments->currentPage() == $i ? 'active' : '' }}">
+                        <a class="page-link" href="{{ $appointments->url($i) }}">{{ $i }}</a>
+                    </li>
+                @endfor
+
+                {{-- Next Page Link --}}
+                <li class="page-item {{ $appointments->hasMorePages() ? '' : 'disabled' }}">
+                    <a class="page-link" href="{{ $appointments->nextPageUrl() }}" aria-label="Next">
+                        &gt;
+                    </a>
+                </li>
+
+                {{-- Last Page Link --}}
+                <li class="page-item {{ $appointments->currentPage() == $appointments->lastPage() ? 'disabled' : '' }}">
+                    <a class="page-link" href="{{ $appointments->url($appointments->lastPage()) }}" aria-label="Last">
+                        &raquo;
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        {{-- Items per page selector --}}
+        <form method="GET" class="d-flex my-3 align-items-center" style="max-width: 120px;">
+            <select name="perPage" class="form-select form-select-sm" onchange="this.form.submit()">
+                @foreach ([10, 15] as $value)
+                    <option value="{{ $value }}" {{ request('perPage') == $value ? 'selected' : '' }}>
+                        {{ $value }}
+                    </option>
+                @endforeach
+            </select>
+        </form>
     </div>
 @endsection
 
