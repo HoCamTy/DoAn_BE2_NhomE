@@ -1,7 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.master')
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
 @section('content')
-    <div class="container">
+    <div class="container my-5">
         <div class="row g-4">
             <div class="col-md-6">
                 <a href="{{ route('customer.appointments.create') }}" class="card-link">

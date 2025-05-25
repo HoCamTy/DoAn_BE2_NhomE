@@ -6,7 +6,7 @@
 <div class="container">
     <div class="rating-container">
         <div class="back-button">
-            <a href="{{ route('home') }}" class="btn btn-secondary">&larr; Quay Lại</a>
+            <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">&larr; Quay Lại</a>
         </div>
         <h2 class="text-center">Đánh Giá Dịch Vụ</h2>
 

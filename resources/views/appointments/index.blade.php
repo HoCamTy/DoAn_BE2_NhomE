@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
         <div class="back-button mb-3">
-            <a href="{{ route('home') }}" class="btn btn-secondary">&larr; Quay Lại</a>
+            <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">&larr; Quay Lại</a>
         </div>
 
         <div class="d-flex justify-content-between align-items-center mb-4">

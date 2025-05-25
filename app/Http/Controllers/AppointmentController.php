@@ -168,7 +168,7 @@ class AppointmentController extends Controller
                 ->withErrors(['error' => 'Có lỗi xảy ra khi cập nhật lịch hẹn: ' . $e->getMessage()]);
         }
     }
-    
+
     public function destroy(Appointment $appointment)
     {
         try {

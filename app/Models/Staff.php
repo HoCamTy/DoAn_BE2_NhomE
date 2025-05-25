@@ -16,7 +16,6 @@ class Staff extends Model
         'staff_name',
         'staff_phone',
         'email',
-        'create_date'
     ];
 
     public $timestamps = false; 

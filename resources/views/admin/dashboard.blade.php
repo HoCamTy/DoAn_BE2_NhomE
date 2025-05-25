@@ -14,14 +14,14 @@
         </div>
         <!-- Nhân Viên -->
         <div class="col-md-6">
-            <a href="" class="card-link">
+            <a href="{{ route('staffs.index')}}" class="card-link">
                 <div class="card shadow">
                     <img src="{{ asset('images/nhanvien.png') }}" alt="Staff">
                     <h5 class="card-title">Nhân Viên</h5>
                 </div>
             </a>
         </div>
-       
+
         <!-- Khách Hàng -->
 <div class="col-md-6">
     <a href="{{ route('customers.index') }}" class="card-link">
@@ -32,7 +32,7 @@
     </a>
 </div>
 
-        
+
         <!-- Thanh Toán -->
         <div class="col-md-6">
             <a href="" class="card-link">

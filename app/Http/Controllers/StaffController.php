@@ -32,7 +32,7 @@ class StaffController extends Controller
     public function store(Request $request) {
     $request->validate([
         'staff_name' => 'required',
-        'staff_phone' => 'required|unique:staffs,staff_phone',
+        'staff_phone' => 'required|numeric|unique:staffs,staff_phone',
         'email' => 'nullable|email',
     ]);
 

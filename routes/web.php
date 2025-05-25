@@ -37,22 +37,22 @@ use App\Http\Controllers\StaffController;
 // });
 
 // customer routes
-Route::middleware(['auth:customer'])->prefix('customer')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('customer.dashboard');
-    })->name('customer.dashboard');
+// Route::middleware(['auth:customer'])->prefix('customer')->group(function () {
+//     Route::get('/dashboard', function () {
+//         return view('customer.dashboard');
+//     })->name('customer.dashboard');
 
-    Route::get('/my-appointments', [AppointmentController::class, 'myAppointments'])->name('customer.appointments');
-    // ...
-});
+//     Route::get('/my-appointments', [AppointmentController::class, 'myAppointments'])->name('customer.appointments');
+//     // ...
+// });
 
-Route::prefix('admin')->group(function () {
-    Route::resource('customers', CustomerController::class);
-    Route::resource('staffs', StaffController::class);
-});
+// Route::prefix('admin')->group(function () {
+//     Route::resource('customers', CustomerController::class);
+//     Route::resource('staffs', StaffController::class);
+// });
 
 
-Route::get('/admin/customers', [CustomerController::class, 'index'])->name('customers.index');
+// Route::get('/admin/customers', [CustomerController::class, 'index'])->name('customers.index');
 
 
 // Public routes
@@ -68,8 +68,11 @@ Route::middleware(['checkauth'])->prefix('admin')->group(function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
 
-    Route::resource('services', ServiceController::class);
+   Route::resource('services', ServiceController::class);
     Route::resource('appointments', AppointmentController::class);
+    Route::resource('customers', CustomerController::class);
+    Route::resource('staffs', StaffController::class);
+
     // Other admin routes
 });
 
@@ -104,18 +107,18 @@ Route::get('create', [CrudUserController::class, 'createUser'])->name('user.crea
 
 
 // Profile routes
-    
+
 
 Route::get('/profile', [CustomerController::class, 'showProfile'])->name('profile');
 
 Route::post('/profile', [CustomerController::class, 'updateProfile'])->name('profile.update');
 // Nếu bạn dùng resource controller:
-Route::resource('customers', CustomerController::class);
+// Route::resource('customers', CustomerController::class);
 
 
 
 // Đăng xuất
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+// Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 

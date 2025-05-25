@@ -12,10 +12,10 @@ class Customer extends Authenticatable
         'phone',
         'email',
         'address',
-        'create_date', 
+        'create_date',
         'password'
     ];
-public $timestamps = false;
+    public $timestamps = false;
     protected $casts = [
         'create_date' => 'datetime'
     ];
@@ -24,5 +24,5 @@ public $timestamps = false;
     {
         return $this->hasMany(Appointment::class);
     }
-    protected $table = 'customers'; 
+    protected $table = 'customers';
 }

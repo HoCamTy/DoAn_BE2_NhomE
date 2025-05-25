@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html>
-
 <head>
     <title>Đặt Lịch Hẹn</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -18,16 +15,17 @@
             position: absolute;
         }
 
-       
 
-      
+
+
     </style>
 </head>
+@extends('layouts.master')
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
-<body>
-    <x-header />
 
-    <main>
+    @section('content')
+        <main>
         <div class="container">
             <div class="back-button mb-3">
                 <a href="{{ route('customer.dashboard') }}" class="btn btn-secondary">&larr; Quay Lại</a>
@@ -129,8 +127,9 @@
             </form>
         </div>
     </main>
+    @endsection
 
-    <x-footer />
+    {{-- <x-footer /> --}}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -151,6 +150,6 @@
             });
         });
     </script>
-</body>
+{{-- </body>
 
-</html>
+</html> --}}

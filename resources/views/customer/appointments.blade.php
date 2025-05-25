@@ -17,7 +17,7 @@
         @endif
 
         <div class="table-responsive">
-            <table class="table table-striped"> 
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>Ngày hẹn</th>
@@ -69,4 +69,5 @@
             </table>
         </div>
     </div>
+    <a href="{{ route('customer.dashboard') }}">Quay lại</a>
 @endsection

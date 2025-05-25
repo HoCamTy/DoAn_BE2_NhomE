@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <title>Quản Lý Khách Hàng</title>
-    <style>
+
+@extends('layouts.app')
+@section('content')
+<style>
         body { font-family: Arial, sans-serif; margin: 40px; background-color: #fff; }
         .container { max-width: 1100px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px; }
         h2 { margin-bottom: 20px; }
@@ -85,8 +83,6 @@
         }
 
     </style>
-</head>
-<body>
 <div class="container">
     <h2>Quản Lý Khách Hàng</h2>
 <a href="{{ route('admin.dashboard') }}" style="display: inline-block; margin-bottom: 10px; padding: 6px 12px; background-color: #eee; border: 1px solid #aaa; border-radius: 4px; text-decoration: none;">← Quay lại trang chủ</a>
@@ -144,5 +140,5 @@
     @endif
 
 </div>
-</body>
-</html>
+@endsection
+

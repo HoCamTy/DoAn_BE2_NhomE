@@ -41,6 +41,17 @@
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
                             <div class="mb-3">
+                                <label for="customer_name" class="form-label">Tên đăng nhập</label>
+                                <input type="text" name="customer_name" id="customer_name"
+                                    class="form-control @error('customer_name') is-invalid @enderror" value="{{ old('customer_name') }}"
+                                    required>
+                                @error('customer_name')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
                                 <label for="phone" class="form-label">Số điện thoại</label>
                                 <input type="text" name="phone" id="phone"
                                     class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone') }}"

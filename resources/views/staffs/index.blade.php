@@ -1,4 +1,4 @@
-@extends('layouts.basic')
+@extends('layouts.app')
 
 @section('content')
 <style>
@@ -86,5 +86,6 @@
     <div class="d-flex justify-content-center">
         {{ $staffs->links() }}
     </div>
+    <a href="{{ route('admin.dashboard') }}">Quay lại trang trước</a>
 </div>
 @endsection

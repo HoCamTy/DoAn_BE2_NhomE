@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container mt-5">
-    <a href="{{ route('home') }}" class="btn btn-secondary mb-3">&larr; Quay Lại</a>
+    <a href="{{ route('index') }}" class="btn btn-secondary mb-3">&larr; Quay Lại</a>
 
     <h2>Thông Tin Khách Hàng</h2>
 

@@ -42,11 +42,14 @@ class LoginController extends Controller
 
         // Try admin login first
         if (Auth::guard('web')->attempt($credentials)) {
+            // dd(1424);
             return redirect()->intended('admin/dashboard');
         }
 
+            // dd(142416525);
+
         // Try customer login
-        $customer = Customer::where('phone', $credentials['username'])->first();
+        $customer = Customer::where('customer_name', $credentials['username'])->first();
         if ($customer) {
             // If customer has no password set, allow login with just phone
             if (is_null($customer->password) && $customer->phone == $credentials['password']) {
@@ -56,7 +59,7 @@ class LoginController extends Controller
             // If password is set, verify it
             else if (!is_null($customer->password) && Hash::check($credentials['password'], $customer->password)) {
                 Auth::guard('customer')->login($customer);
-                return redirect()->intended('customer/dashboard');
+                return redirect()->route('index');
             }
         }
 
