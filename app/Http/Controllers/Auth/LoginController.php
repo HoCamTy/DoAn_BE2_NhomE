@@ -49,7 +49,7 @@ class LoginController extends Controller
             // dd(142416525);
 
         // Try customer login
-        $customer = Customer::where('customer_name', $credentials['username'])->first();
+        $customer = Customer::where('phone', $credentials['username'])->first();
         if ($customer) {
             // If customer has no password set, allow login with just phone
             if (is_null($customer->password) && $customer->phone == $credentials['password']) {
