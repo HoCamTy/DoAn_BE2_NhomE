@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\Models\User;
+use App\Models\Customer; // dùng Customer thay vì User
 
-class PasswordResetController extends Controller
+class ResetPassword extends Controller
 {
     public function showForm()
     {
@@ -17,17 +17,17 @@ class PasswordResetController extends Controller
     {
         $request->validate([
             'email' => 'required|email',
-            'new_password' => 'required|min:6|confirmed', // thêm confirmed
+            'new_password' => 'required|min:6|confirmed', // cần có field new_password_confirmation
         ]);
 
-        $user = User::where('email', $request->email)->first();
+        $customer = Customer::where('email', $request->email)->first();
 
-        if (!$user) {
+        if (!$customer) {
             return back()->with('message', 'Không tìm thấy email này trong hệ thống.');
         }
 
-        $user->password = Hash::make($request->new_password);
-        $user->save();
+        $customer->password = Hash::make($request->new_password);
+        $customer->save();
 
         return back()->with('message', 'Mật khẩu đã được cập nhật thành công.');
     }

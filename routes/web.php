@@ -9,6 +9,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\CustomerRatingController;
 use App\Http\Controllers\PasswordResetController;
+use App\Http\Controllers\ResetPassword;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\CustomerRating;
@@ -126,8 +127,10 @@ Route::post('/profile', [CustomerController::class, 'updateProfile'])->name('pro
 
 
 
-Route::get('/password/reset', [PasswordResetController::class, 'showForm'])->name('password.form');
-Route::post('/password/reset', [PasswordResetController::class, 'handleReset'])->name('password.reset');
+// Route::get('/password/reset', [PasswordResetController::class, 'showForm'])->name('password.form');
+// Route::post('/password/reset', [PasswordResetController::class, 'handleReset'])->name('password.reset');
+Route::get('/password/reset', [ResetPassword::class, 'showForm'])->name('password.form');
+Route::post('/password/reset', [ResetPassword::class, 'handleReset'])->name('password.reset');
 
 
 Route::get('/ratings/create', [CustomerRatingController::class, 'create'])->name('ratings.create');
