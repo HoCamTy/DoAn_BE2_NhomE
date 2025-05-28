@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Service extends Model
 {
@@ -18,14 +19,38 @@ class Service extends Model
         'create_date' => 'datetime'
     ];
 
-    public function categories()
+    /**
+     * Quan hệ: Dịch vụ thuộc nhiều danh mục
+     */
+    public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class, 'category_service');
     }
 
-    public function appointments()
+    /**
+     * Quan hệ: Dịch vụ thuộc nhiều cuộc hẹn
+     */
+    public function appointments(): BelongsToMany
     {
         return $this->belongsToMany(Appointment::class)
-            ->withTimestamps();
+                    ->withTimestamps();
     }
+
+    /**
+     * Quan hệ: Dịch vụ được sử dụng trong nhiều thanh toán
+     */
+    public function payments(): BelongsToMany
+    {
+        return $this->belongsToMany(Payment::class, 'payment_service')
+                    ->withPivot('staff_id')
+                    ->withTimestamps();
+    }
+
+    /**
+     * Quan hệ: Lấy các nhân viên thực hiện dịch vụ (thông qua bảng payment_service)
+     */
+  public function staff()
+{
+    return $this->belongsToMany(Staff::class, 'payment_service', 'service_id', 'staff_id');
+}
 }

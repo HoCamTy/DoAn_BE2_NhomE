@@ -41,8 +41,10 @@ class LoginController extends Controller
         ]);
 
         // Try admin login first
+            // $user = User::where('username', $credentials['username'])->first();
+            // dd($user);
+        // dd(vars: Auth::guard('web')->attempt($credentials));
         if (Auth::guard('web')->attempt($credentials)) {
-            // dd(1424);
             return redirect()->intended('admin/dashboard');
         }
 

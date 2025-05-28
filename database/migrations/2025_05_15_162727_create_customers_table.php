@@ -22,6 +22,15 @@ return new class extends Migration
 
     public function down(): void
     {
+        // Tắt kiểm tra khóa ngoại
+    DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
+    Schema::dropIfExists('customers');
+
+    // Bật lại kiểm tra khóa ngoại
+    DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+
         Schema::dropIfExists('customers');
     }
 };

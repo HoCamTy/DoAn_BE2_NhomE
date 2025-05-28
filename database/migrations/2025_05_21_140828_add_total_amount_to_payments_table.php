@@ -9,12 +9,15 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-   public function up()
+  public function up(): void
 {
-    Schema::table('payments', function (Blueprint $table) {
-        $table->decimal('total_amount', 10, 2)->after('customer_id');
-    });
+    if (!Schema::hasColumn('payments', 'total_amount')) {
+        Schema::table('payments', function (Blueprint $table) {
+            $table->decimal('total_amount', 10, 2)->after('customer_id');
+        });
+    }
 }
+
 
 
     /**

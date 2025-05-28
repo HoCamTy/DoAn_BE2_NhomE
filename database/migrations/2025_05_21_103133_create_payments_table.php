@@ -9,16 +9,15 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
-{
-    Schema::create('payment_service', function (Blueprint $table) {
-        $table->id();
-        $table->foreignId('payment_id')->constrained()->onDelete('cascade');
-        $table->foreignId('service_id')->constrained()->onDelete('cascade');
-        $table->foreignId('staff_id')->nullable()->constrained()->onDelete('set null');
-        $table->timestamps();
-    });
-
+    public function up(): void
+    {
+        Schema::create('payments', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('customer_id')->constrained()->onDelete('cascade');
+            $table->decimal('total_amount', 10, 2);
+            $table->string('payment_method');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('payments');
+        Schema::dropIfExists('payments'); 
     }
 };

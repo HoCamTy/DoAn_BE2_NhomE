@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\CustomerRating;
 
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\StaffController;
-
+use App\Http\Controllers\PaymentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,9 +52,17 @@ use App\Http\Controllers\StaffController;
 //     Route::resource('staffs', StaffController::class);
 // });
 
+Route::get('/admin/dashboard', function () {
+    return view('admin.dashboard'); 
+})->name('admin.dashboard');
+
 
 // Route::get('/admin/customers', [CustomerController::class, 'index'])->name('customers.index');
 
+Route::get('/payments/create', [PaymentController::class, 'create'])->name('payments.create');
+
+
+Route::resource('payments', PaymentController::class);
 
 // Public routes
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
